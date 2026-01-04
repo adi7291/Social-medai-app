@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
+      minlength: 6,
     },
     profileImage: {
       type: String,
@@ -32,7 +33,7 @@ const userSchema = new mongoose.Schema(
     ],
     post: [
       {
-        type: mongoose.schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "POST",
       },
     ],
@@ -55,7 +56,7 @@ const userSchema = new mongoose.Schema(
       },
     ],
   },
-  timestamps
+  { timestamps: true }
 );
 
 const User = mongoose.model("User", userSchema);

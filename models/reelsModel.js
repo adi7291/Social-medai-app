@@ -11,7 +11,7 @@ const reelSchema = new mongoose.Schema(
       required: true,
     },
     caption: String,
-    like: [
+    likes: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
@@ -27,5 +27,5 @@ const reelSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Reels = mongoose.model("Reel", reelSchema);
-export default Reels;
+const Reel = mongoose.model("Reel", reelSchema);
+export default Reel;

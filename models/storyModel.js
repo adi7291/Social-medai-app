@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const storySchema = new mongoose.Schema({
   author: {
-    types: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
   },
@@ -13,16 +13,18 @@ const storySchema = new mongoose.Schema({
   mediaType: {
     type: String,
     required: true,
-    enum: [image, video],
+    enum: `['image', 'video']`,
   },
-  viewers: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  },
+  view: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now(),
-    expiresAt: 86400,
+    expires: 86400,
   },
 });
 
