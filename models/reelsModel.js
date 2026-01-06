@@ -2,22 +2,20 @@ import mongoose from "mongoose";
 
 const reelSchema = new mongoose.Schema(
   {
+    caption: String,
+
     author: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
       required: true,
+      index: true,
     },
+
     media: {
       type: String,
       required: true,
     },
-    caption: String,
-    like: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
-    comments: [
+    likes: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
@@ -27,5 +25,7 @@ const reelSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Reels = mongoose.model("Reel", reelSchema);
-export default Reels;
+const Reel = mongoose.model("Reel", reelSchema);
+export default Reel;
+
+//removed a comments from the schema.

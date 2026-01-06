@@ -2,14 +2,18 @@ import mongoose from "mongoose";
 
 const postSchema = new mongoose.Schema(
   {
-    captions: String,
-    author: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        refs: "User",
-        required: true,
-      },
-    ],
+    captions: {
+      type: String,
+      maxlength: 2000,
+      trim: true,
+    },
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+      index: true,
+    },
+
     media: {
       type: String,
       required: true,
@@ -19,14 +23,12 @@ const postSchema = new mongoose.Schema(
       enum: ["image", "video"],
       required: true,
     },
-    tags: String,
+    // tags: [
+    //   {
+    //     type:String
+    //   }
+    // ]
     likes: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
-    comments: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
@@ -38,3 +40,5 @@ const postSchema = new mongoose.Schema(
 const Post = mongoose.model("Post", postSchema);
 
 export default Post;
+
+// removed comments from the Post schema as each post can have millions of comments and comments can have 1000 of reply and likes.
