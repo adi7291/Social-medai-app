@@ -7,6 +7,7 @@ import cors from "cors";
 
 import connectDb from "./config/db.js";
 import postRoutes from "./routes/posts.js";
+import generateAccessToken from "./config/token.js";
 
 // 1️⃣ Load env FIRST
 const app = express();
@@ -18,7 +19,7 @@ app.use(cors());
 app.use("/posts", postRoutes);
 
 const port = process.env.PORT || 5000;
-
+generateAccessToken();
 const startServer = async () => {
   try {
     await connectDb();
